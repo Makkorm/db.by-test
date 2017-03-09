@@ -1,0 +1,442 @@
+$text-color: #354343;
+$body-bg: #fff;
+$border-color: #e8e8e8;
+$theme-color: #72b13a;
+$white-color: #fff;
+$sub-menu-bg: #f7f7f7;
+$slider-indicator-bg: #c9e0c2;
+
+
+// display size
+$wide-screens: 1200px;
+$desktops: 1024px;
+$tablet: 768px;
+$phones: 320px;
+$grid-float-breakpoint: 1200px;
+
+  // media queries
+@mixin wide-screens {
+  @media (max-width: #{$wide-screens}) {
+    @content;
+  }
+}
+@mixin desktops {
+  @media (max-width: #{$desktops - 1px}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: #{$tablet - 1px}) {
+    @content;
+  }
+}
+@mixin phones {
+  @media (max-width: #{$phones}) {
+    @content;
+  }
+}
+
+@mixin RobotoLight {
+  font-family: RobotoLight, sans-serif
+}
+
+@mixin  Vida33Pro {
+  font-family: Vida33Pro,serif;
+}
+
+body {
+  @include RobotoLight;
+  background: $body-bg;
+  a {
+    color: $text-color;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+  }
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+// header
+.main-header {
+  padding: 15px 0;
+  border-bottom: 1px solid $border-color;
+}
+
+.logo {
+  @include tablet {
+    img {
+      width: 98%;
+      max-width: 430px;
+    }
+  }
+}
+
+.generic-info {
+  @include tablet {
+    margin-top: 10px;
+  }
+  p {
+    margin: 0;
+    text-align: right;
+    @include tablet {
+      text-align: left;
+    }
+  }
+  .Cosmetologist {
+    margin-bottom: 15px;
+    @include tablet {
+      margin-bottom: 8px;
+    }
+    a {
+      padding: 3px 0 3px 30px;
+      background: url(../media/acc_icon.png) center left no-repeat;
+    }
+  }
+  .phone {
+    font-size: 20px;
+    font-weight: bold;
+    @include tablet {
+      font-size: 16px;
+    }
+  }
+  .message {
+    a {
+      border-bottom: 1px dashed $text-color;
+    }
+  }
+}
+
+// nav
+
+// меняем @grid-float-breakpoint
+@include desktops {
+  .navbar-header {
+    float: none;
+  }
+  .navbar-left,.navbar-right {
+    float: none !important;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+    display: none!important;
+  }
+  .navbar-nav {
+    float: none!important;
+    margin-top: 7.5px;
+  }
+  .navbar-nav>li {
+    float: none;
+  }
+  .navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .collapse.in{
+    display:block !important;
+  }
+}
+
+.navbar-collapse {
+  padding: 0;
+}
+
+.navbar-toggle {
+  border: 1px solid $text-color;
+  .icon-bar {
+    background: $text-color;
+  }
+}
+
+.menu {
+  li {
+    float: left;
+    position: relative;
+    @include desktops {
+      float: none;
+      text-align: center;
+      border-bottom: 1px solid $border-color;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    &:hover {
+      >a {
+        background: $theme-color;
+        color: $white-color;
+      }
+      .sub-menu {
+        display: block;
+      }
+    }
+  }
+  a {
+    padding: 14px;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    @include wide-screens {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  bottom: -97px;
+  left: 0;
+  min-width: 228px;
+  border-top: 1px solid $theme-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  z-index: 99;
+  @include desktops {
+    position: static;
+    border-bottom: none;
+  }
+  li {
+    width: 100%;
+    background: $white-color;
+    @include desktops {
+      background: $sub-menu-bg;
+    }
+    &:hover {
+      a {
+        background: $sub-menu-bg;
+        color: $text-color
+      }
+    }
+  }
+  a {
+    font-size: 14px;
+  }
+}
+// делаем правки для ie
+// правок немного, так что в отдельный файл не выношу
+:root {
+  .sub-menu {
+    min-width: 250px\0;
+  }
+}
+
+// search
+
+.navbar-header {
+  float: right;
+  @include desktops {
+    float: none;
+  }
+}
+
+.search {
+  padding-top: 15px;
+  float: right;
+  @include wide-screens {
+    padding-top: 8px;
+  }
+  @include desktops {
+    float: left;
+  }
+  @include tablet {
+    padding-top: 15px;
+  }
+  input {
+    border: none;
+    padding: 2px 5px;
+    max-width: 150px;
+  }
+}
+.search-button {
+  outline: none;
+  border: none;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(../media/search_icon.png) center right no-repeat;
+}
+
+
+// slider
+
+.slide {
+  .item {
+    width: 100%;
+    height: 560px;
+    @include tablet {
+      height: 360px;
+    }
+  }
+}
+.item1 {
+  background: url(../media/slide.jpg);
+  background-size: cover;
+  @include desktops {
+    background-size: auto;
+  }
+}
+.item2 {
+  background: url(../media/slide.jpg);
+  background-size: cover;
+  @include desktops {
+    background-size: auto;
+  }
+}
+.item3 {
+  background: url(../media/slide.jpg);
+  background-size: cover;
+  @include desktops {
+    background-size: auto;
+  }
+}
+
+.carousel-indicators {
+  li {
+    background: $slider-indicator-bg;
+    &.active {
+      background: $theme-color;
+    }
+  }
+}
+
+.descr-box {
+  height: 100%;
+}
+
+.descr-box-inner {
+  width: 50%;
+  height: 100%;
+  @include tablet {
+    width: 98%;
+  }
+}
+
+.descr-wrapper {
+  display: table;
+  height: 100%;
+}
+.carousel-caption {
+  display: table-cell;
+  vertical-align: middle;
+  position: static;
+  padding: 0 30px;
+  text-align: left;
+  @include Vida33Pro;
+  color: $text-color;
+  box-shadow: none;
+  text-shadow: none;
+  h2 {
+    font-size: 40px;
+    @include tablet {
+      font-size: 28px;
+    }
+    span {
+      text-transform: uppercase;
+    }
+  }
+  p {
+    padding-bottom: 20px;
+    @include RobotoLight;
+    width: 70%;
+    @include tablet {
+      width: 100%;
+    }
+  }
+}
+
+.button {
+  padding: 8px 12px;
+  background: $text-color;
+  color: $white-color;
+  &:hover {
+    color: $white-color;
+    background: $theme-color;
+  }
+}
+
+// products
+.ptoducts {
+  padding-bottom: 50px;
+}
+
+article {
+  margin-top: 50px;
+  border: 1px solid $border-color;
+  padding: 20px;
+  position: relative;
+  h3 {
+    display: table;
+    margin-top: -35px;
+    background: $white-color;
+    padding: 0 5px;
+    @include Vida33Pro;
+    @include wide-screens {
+      font-size: 20px;
+      margin-top: -30px;
+    }
+  }
+  img {
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+    @include wide-screens {
+      right: 25px;
+    }
+    @include desktops {
+      display: none;
+    }
+  }
+  p {
+    width: 60%;
+    font-weight: bold;
+    @include wide-screens {
+      width: 70%;
+    }
+    @include desktops {
+      width: 100%;
+    }
+  }
+  a {
+    &:hover {
+      color: $text-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
